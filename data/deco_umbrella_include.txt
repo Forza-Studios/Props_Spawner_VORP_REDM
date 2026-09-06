@@ -1,0 +1,1 @@
+mp004_p_parasol04x,p_hangingumbrella01x,p_parasol_cs02x,p_parasol01x,p_parasol02x,p_parasol03x,p_umbrella01x,p_umbrellanbx01x,p_umbrellanbx01xcs,p_umbrellanbx02x,p_umbrellanbx02x_static,p_umbrellanbx03x,s_umbrellanbx01x

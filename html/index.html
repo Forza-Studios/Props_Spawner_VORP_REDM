@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSG Prop Gizmo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="nui-text-modal" class="nui-modal hidden">
+        <div class="nui-modal-backdrop"></div>
+        <div class="nui-modal-box" role="dialog" aria-modal="true">
+            <p class="nui-modal-title" id="nui-text-modal-title"></p>
+            <input type="text" id="nui-text-modal-input" class="nui-modal-input" autocomplete="off" />
+            <div class="nui-modal-actions">
+                <button type="button" class="btn-place" id="nui-text-modal-ok">OK</button>
+                <button type="button" class="nui-modal-cancel" id="nui-text-modal-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="nui-confirm-modal" class="nui-modal hidden">
+        <div class="nui-modal-backdrop"></div>
+        <div class="nui-modal-box" role="dialog" aria-modal="true">
+            <p class="nui-modal-title" id="nui-confirm-modal-msg"></p>
+            <div class="nui-modal-actions">
+                <button type="button" class="btn-place" id="nui-confirm-modal-ok">OK</button>
+                <button type="button" class="nui-modal-cancel" id="nui-confirm-modal-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-root" class="hidden">
+        <div class="gizmo-shell">
+            <aside class="sidebar">
+                <div class="sidebar-head">Categories</div>
+                <nav class="sidebar-nav" id="sidebar-nav">
+                    <button type="button" class="nav-btn active" data-view="all">All Props</button>
+                    <button type="button" class="nav-btn" data-view="favorites">Favorites</button>
+                    <button type="button" class="nav-btn" data-view="peds">Peds</button>
+                    <button type="button" class="nav-btn" data-view="blips">Blips</button>
+                    <button type="button" class="nav-btn" data-view="placed">Placed</button>
+                    <div id="category-nav"></div>
+                </nav>
+            </aside>
+            <main class="main-panel">
+                <header class="top-bar">
+                    <div class="title-brand">
+                        <h1 class="title">Props Gallery</h1>
+                    </div>
+                    <input type="search" id="search-input" class="search-input" placeholder="Search props, peds, blips, archetypes…" autocomplete="off" />
+                    <button type="button" class="btn-close" id="btn-close" title="Close">×</button>
+                </header>
+                <div id="content-placed" class="content-placed hidden"></div>
+                <div id="content-grid-wrap" class="content-grid-wrap">
+                    <div id="props-grid" class="props-grid"></div>
+                </div>
+            </main>
+        </div>
+
+        <aside id="placement-dock" class="placement-dock hidden">
+            <div class="placement-inner">
+                <header class="placement-head">
+                    <h2 class="placement-title">Placement</h2>
+                    <p class="placement-model" id="placement-model-label"></p>
+                </header>
+                <section class="pl-section">
+                    <span class="pl-label">Move</span>
+                    <div class="pl-grid">
+                        <span></span>
+                        <button type="button" class="pl-btn" data-dir="forward" title="Forward">↑</button>
+                        <span></span>
+                        <button type="button" class="pl-btn" data-dir="left" title="Left">←</button>
+                        <span class="pl-center"></span>
+                        <button type="button" class="pl-btn" data-dir="right" title="Right">→</button>
+                        <span></span>
+                        <button type="button" class="pl-btn" data-dir="back" title="Back">↓</button>
+                        <span></span>
+                    </div>
+                </section>
+                <section class="pl-section">
+                    <span class="pl-label">Speed</span>
+                    <div class="pl-speed-row">
+                        <input type="range" id="pl-speed" class="pl-speed" min="5" max="100" step="5" value="100" />
+                    </div>
+                    <p class="pl-speed-val" id="pl-speed-pct">100%</p>
+                    <label class="pl-check-wrap">
+                        <input type="checkbox" id="pl-free-move" />
+                        <span id="pl-free-move-label">Free move (WASD + mouse)</span>
+                    </label>
+                </section>
+                <section class="pl-section">
+                    <span class="pl-label">Rotate (Z)</span>
+                    <div class="pl-row">
+                        <button type="button" class="pl-btn" data-dir="rotLeft" title="Counter-clockwise">↶</button>
+                        <button type="button" class="pl-btn" data-dir="rotRight" title="Clockwise">↷</button>
+                    </div>
+                </section>
+                <section class="pl-section">
+                    <span class="pl-label">Height</span>
+                    <div class="pl-row">
+                        <button type="button" class="pl-btn" data-dir="heightUp" title="Up">⬆</button>
+                        <button type="button" class="pl-btn" data-dir="heightDown" title="Down">⬇</button>
+                    </div>
+                </section>
+                <section class="pl-section">
+                    <span class="pl-label">Pitch</span>
+                    <div class="pl-row">
+                        <button type="button" class="pl-btn" data-dir="pitchUp" title="Pitch +">▲</button>
+                        <button type="button" class="pl-btn" data-dir="pitchDown" title="Pitch −">▼</button>
+                    </div>
+                </section>
+                <section class="pl-section">
+                    <span class="pl-label">Roll</span>
+                    <div class="pl-row">
+                        <button type="button" class="pl-btn" data-dir="rollLeft" title="Roll −">⟲</button>
+                        <button type="button" class="pl-btn" data-dir="rollRight" title="Roll +">⟳</button>
+                    </div>
+                </section>
+                <footer class="pl-footer">
+                    <button type="button" class="pl-confirm" id="pl-confirm">Place</button>
+                    <button type="button" class="pl-reset" id="pl-reset">Reset position</button>
+                    <button type="button" class="pl-cancel" id="pl-cancel">Cancel</button>
+                </footer>
+                <p class="pl-hint">ESC — cancel. Hold LMB on move buttons.</p>
+            </div>
+        </aside>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

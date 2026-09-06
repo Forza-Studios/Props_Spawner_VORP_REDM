@@ -1,0 +1,10 @@
+>>Music
+mp005_p_mp_banjo01x,mp006_p_dblcello01x,mp006_p_dbstand01x,mp006_p_guitar02x,p_accordion_001,p_banjo01x,p_bow01x,p_bugle01x,p_cello01x,p_cs_concertina01x,p_cs_contrabass01x,p_cs_drumkit01x,p_drumstick01x,p_fiddle01x,p_gen_piano01x_tc01,p_guitar01x,p_harmonica01x,p_harp01x,p_mandolin01x,p_musicstand01x,p_musicstand02x,p_nbmpiano01x,p_nbxpiano01x,p_phonograph01x,p_piano02x,p_piano03x,p_piano03x_closed,p_sheetmusic01x,p_trumpet01x,p_viola01x,s_banjosnakeskin01x,sha_man_piano01,sha_man_piano02
+>>Newpaper
+@deco_newpaper_include.txt
+>>Paint
+@deco_paint_include.txt
+>>Papers
+@deco_papers_include.txt
+>>Photo
+@deco_photo_include.txt

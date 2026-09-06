@@ -1,0 +1,24 @@
+>>Plant
+@deco_plant_include.txt
+>>Planter
+@deco_planter_include.txt
+>>Poster
+@deco_poster_include.txt
+>>School
+p_chalkboard01x,p_chalksign06x,p_scr_chalkboard
+>>Statues
+@deco_statues_include.txt
+>>Stuffed Animals
+@deco_stuffed_include.txt
+>>Typewriter
+p_typewriter01x,p_typewriter02x,p_typewriterset01x
+>>Umbrella
+@deco_umbrella_include.txt
+>>Various
+@deco_various_include.txt
+>>Vase
+@deco_vase_include.txt
+>>Wall Painting
+@deco_wallpainting_include.txt
+>>X Mas
+@deco_xmas_include.txt
