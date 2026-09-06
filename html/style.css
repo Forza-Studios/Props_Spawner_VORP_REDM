@@ -26,6 +26,7 @@ html, body {
     background: rgba(0, 0, 0, 0.55);
 }
 
+/* During placement: no dimming over the world; only the dock catches clicks. */
 #app-root.placement-world-visible {
     background: transparent;
     pointer-events: none;
@@ -94,6 +95,53 @@ html, body {
     color: #fff;
 }
 
+.nav-group-toggle {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    margin-bottom: 2px;
+    border: none;
+    border-radius: 6px;
+    background: #1a1a1a;
+    color: #ddd;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.nav-group-toggle::after {
+    content: "▾";
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+.nav-group.open .nav-group-toggle::after {
+    transform: rotate(-180deg);
+}
+
+.nav-sub {
+    padding-left: 6px;
+    margin-bottom: 8px;
+}
+
+.nav-spooni-nested {
+    border-left: 2px solid #252525;
+    margin-left: 2px;
+    padding-left: 4px;
+}
+
+.nav-group-nested .nav-group-toggle {
+    background: #161616;
+    font-size: 13px;
+    padding: 8px 10px;
+}
+
+.nav-sub .nav-btn {
+    font-size: 13px;
+    padding: 8px 10px;
+}
+
 .main-panel {
     flex: 1;
     display: flex;
@@ -115,6 +163,30 @@ html, body {
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
+    min-width: 0;
+}
+
+/* Default: gizmo logo; Spooni only while browsing a subfolder under «Spooni Props». */
+.title-logo-stack {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.title-logo-stack .title-logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    display: block;
+    border-radius: 8px;
+}
+
+.title-logo-stack .title-logo.hidden {
+    display: none;
 }
 
 .title {
@@ -123,6 +195,7 @@ html, body {
     font-weight: 600;
     color: #fff;
     flex-shrink: 0;
+    line-height: 1.2;
 }
 
 .search-input {
@@ -149,6 +222,7 @@ html, body {
     background: #2a2a2a;
     color: #fff;
     font-size: 22px;
+    line-height: 1;
     cursor: pointer;
 }
 
@@ -160,6 +234,35 @@ html, body {
     flex: 1;
     overflow: auto;
     padding: 14px 18px;
+}
+
+.catalog-pagination {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.catalog-pagination button {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background: #333;
+    color: #fff;
+}
+
+.catalog-pagination button:hover:not(:disabled) {
+    background: #e85d04;
+}
+
+.catalog-pagination button:disabled {
+    opacity: 0.45;
+    cursor: default;
 }
 
 .props-grid {
@@ -226,15 +329,20 @@ html, body {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 6px;
+    align-items: stretch;
 }
 
 .prop-actions button {
+    min-width: 0;
     padding: 6px 8px;
     font-size: 11px;
     border-radius: 4px;
     border: none;
     cursor: pointer;
     font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .btn-copy {
@@ -260,6 +368,9 @@ html, body {
     width: 100%;
     background: #e85d04;
     color: #fff;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
     padding-top: 8px;
     padding-bottom: 8px;
 }
@@ -279,6 +390,268 @@ html, body {
     align-items: center;
     gap: 10px;
     margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.placed-toolbar-label {
+    color: #aaa;
+    font-size: 12px;
+}
+
+.placed-group-filter,
+.placed-row-group-select {
+    padding: 6px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background: #1a1a1a;
+    color: #eee;
+    max-width: 220px;
+}
+
+.content-player-skin {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 14px 18px;
+}
+
+.player-skin-toolbar {
+    flex-shrink: 0;
+    margin-bottom: 12px;
+}
+
+.player-skin-hint {
+    font-size: 11px;
+    color: #888;
+    line-height: 1.45;
+    margin: 0 0 10px 0;
+    max-width: 900px;
+}
+
+.player-skin-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.player-skin-target-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #161616;
+}
+
+.player-skin-target-info {
+    font-size: 12px;
+    color: #bbb;
+    line-height: 1.4;
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+}
+
+.btn-player-skin-delete {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid #633;
+    background: #2a1818;
+    color: #f0b0a8;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btn-player-skin-delete:hover {
+    background: #3a2220;
+    border-color: #844;
+    color: #ffd4cc;
+}
+
+.player-skin-steam {
+    min-width: 220px;
+    padding: 8px 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid #444;
+    background: #111;
+    color: #eee;
+}
+
+.player-skin-selected {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.player-skin-grid-wrap {
+    flex: 1;
+    overflow: auto;
+    min-height: 0;
+}
+
+.player-skin-roster-wrap {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #333;
+    max-height: 38vh;
+    overflow: auto;
+}
+
+.player-skin-roster-title {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #e8c088;
+}
+
+.player-skin-roster-refresh {
+    margin-bottom: 12px;
+}
+
+.player-skin-roster-section {
+    margin-bottom: 16px;
+}
+
+.player-skin-roster-section h4 {
+    margin: 0 0 6px 0;
+    font-size: 12px;
+    color: #aaa;
+    font-weight: 600;
+}
+
+.player-skin-roster-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-bottom: 8px;
+}
+
+.player-skin-roster-table th,
+.player-skin-roster-table td {
+    border: 1px solid #333;
+    padding: 6px 8px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.player-skin-roster-table th {
+    background: #252525;
+    color: #ccc;
+}
+
+.player-skin-roster-th-actions {
+    width: 52px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.player-skin-roster-cell-action {
+    text-align: center;
+    vertical-align: middle;
+    padding: 4px 6px !important;
+}
+
+.btn-skin-roster-delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 8px;
+    margin: 0;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background: #2a2020;
+    color: #e8a090;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.btn-skin-roster-delete:hover {
+    background: #3a2828;
+    color: #ffc9b8;
+}
+
+.btn-skin-roster-delete:focus-visible {
+    outline: 2px solid #c96;
+    outline-offset: 1px;
+}
+
+.player-skin-roster-empty {
+    color: #666;
+    font-size: 12px;
+    margin: 8px 0 0 0;
+}
+
+.prop-card-selected {
+    outline: 2px solid #e85d04;
+    outline-offset: 2px;
+}
+
+.btn-folder-plus {
+    min-width: 36px;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 20px;
+    line-height: 1;
+    border-radius: 4px;
+    border: 1px solid #555;
+    background: #2a2a2a;
+    color: #eee;
+    cursor: pointer;
+}
+
+.btn-folder-plus:hover {
+    background: #3d3d3d;
+}
+
+.btn-folder-delete {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid #633;
+    background: #301818;
+    color: #f0b0a0;
+    cursor: pointer;
+}
+
+.btn-folder-delete:hover {
+    background: #402020;
+}
+
+.placed-folder-cell-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+    max-width: 260px;
+}
+
+.placed-folder-badges {
+    font-size: 10px;
+    color: #888;
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.btn-folder-remove {
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 3px;
+    border: 1px solid #444;
+    background: #222;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.btn-folder-remove:hover {
+    background: #333;
 }
 
 .placed-table {
@@ -299,9 +672,53 @@ html, body {
     font-weight: 600;
 }
 
-.placed-table button {
+.placed-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.placed-kind-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 6px;
+    margin-right: 4px;
+    border-radius: 3px;
+    background: #3d3558;
+    color: #ddd6ff;
+    vertical-align: middle;
+}
+
+.placed-ped-missing {
+    color: #a66;
+    font-size: 11px;
+}
+
+.placed-ped-flags {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 6px;
+    min-width: 150px;
+}
+
+.placed-ped-flag-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #bbb;
+    cursor: pointer;
+    user-select: none;
+}
+
+.placed-ped-flag-label input {
+    cursor: pointer;
+}
+
+.placed-actions button {
     padding: 6px 10px;
-    margin-right: 6px;
     font-size: 12px;
     border-radius: 4px;
     border: none;
@@ -310,12 +727,41 @@ html, body {
     color: #fff;
 }
 
-.placed-table button:hover {
+.placed-actions button:hover {
     background: #e85d04;
 }
 
-.placed-table button.danger:hover {
+.placed-actions .danger:hover {
     background: #a32020;
+}
+
+.placed-pagination {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.placed-pagination button {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background: #333;
+    color: #fff;
+}
+
+.placed-pagination button:hover:not(:disabled) {
+    background: #e85d04;
+}
+
+.placed-pagination button:disabled {
+    opacity: 0.45;
+    cursor: default;
 }
 
 /* Placement dock */
@@ -475,7 +921,52 @@ html, body {
     line-height: 1.4;
 }
 
-/* Modals */
+/* In-game skin hints (outside #app-root; visible with UI closed) */
+.skin-hint-dock {
+    position: fixed;
+    right: 12px;
+    top: 18%;
+    max-width: min(340px, 42vw);
+    z-index: 2147483000;
+    pointer-events: none !important;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.skin-hint-dock * {
+    pointer-events: none !important;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.skin-hint-inner {
+    background: rgba(12, 12, 12, 0.88);
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 12px 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.skin-hint-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #f4d9b8;
+    margin-bottom: 8px;
+}
+
+.skin-hint-list {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: #ccc;
+}
+
+.skin-hint-list li {
+    margin-bottom: 6px;
+}
+
+/* NUI text / confirm modals (replace window.prompt — avoids CEF freeze) */
 .nui-modal {
     position: fixed;
     inset: 0;
@@ -483,6 +974,11 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: auto;
+}
+
+.nui-modal.hidden {
+    display: none !important;
 }
 
 .nui-modal-backdrop {
@@ -495,10 +991,12 @@ html, body {
     position: relative;
     z-index: 1;
     min-width: 280px;
+    max-width: 90vw;
     padding: 18px 20px;
     background: #1e1e1e;
     border: 1px solid #555;
     border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
 .nui-modal-title {
@@ -532,4 +1030,8 @@ html, body {
     background: #333;
     color: #ccc;
     cursor: pointer;
+}
+
+.nui-modal-cancel:hover {
+    background: #444;
 }

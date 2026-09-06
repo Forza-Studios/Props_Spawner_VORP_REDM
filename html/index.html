@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSG Prop Gizmo</title>
+    <title>Prop Gizmo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="skin-hint-dock" class="skin-hint-dock hidden" aria-live="polite" tabindex="-1">
+        <div class="skin-hint-inner">
+            <div class="skin-hint-title" id="skin-hint-title"></div>
+            <ul class="skin-hint-list" id="skin-hint-list"></ul>
+        </div>
+    </div>
     <div id="nui-text-modal" class="nui-modal hidden">
         <div class="nui-modal-backdrop"></div>
         <div class="nui-modal-box" role="dialog" aria-modal="true">
             <p class="nui-modal-title" id="nui-text-modal-title"></p>
             <input type="text" id="nui-text-modal-input" class="nui-modal-input" autocomplete="off" />
             <div class="nui-modal-actions">
-                <button type="button" class="btn-place" id="nui-text-modal-ok">OK</button>
-                <button type="button" class="nui-modal-cancel" id="nui-text-modal-cancel">Cancel</button>
+                <button type="button" class="btn-place" id="nui-text-modal-ok">ОК</button>
+                <button type="button" class="nui-modal-cancel" id="nui-text-modal-cancel">Отмена</button>
             </div>
         </div>
     </div>
-    
     <div id="nui-confirm-modal" class="nui-modal hidden">
         <div class="nui-modal-backdrop"></div>
         <div class="nui-modal-box" role="dialog" aria-modal="true">
             <p class="nui-modal-title" id="nui-confirm-modal-msg"></p>
             <div class="nui-modal-actions">
-                <button type="button" class="btn-place" id="nui-confirm-modal-ok">OK</button>
-                <button type="button" class="nui-modal-cancel" id="nui-confirm-modal-cancel">Cancel</button>
+                <button type="button" class="btn-place" id="nui-confirm-modal-ok">ОК</button>
+                <button type="button" class="nui-modal-cancel" id="nui-confirm-modal-cancel">Отмена</button>
             </div>
         </div>
     </div>
-
     <div id="app-root" class="hidden">
         <div class="gizmo-shell">
             <aside class="sidebar">
@@ -40,18 +44,29 @@
                     <button type="button" class="nav-btn" data-view="peds">Peds</button>
                     <button type="button" class="nav-btn" data-view="blips">Blips</button>
                     <button type="button" class="nav-btn" data-view="placed">Placed</button>
+                    <button type="button" class="nav-btn" data-view="playerSkin">Player skin</button>
                     <div id="category-nav"></div>
                 </nav>
             </aside>
             <main class="main-panel">
                 <header class="top-bar">
                     <div class="title-brand">
+                        <div class="title-logo-stack" aria-hidden="true">
+                            <img id="title-logo-gizmo" class="title-logo" src="img/gizmo.png" alt="" width="40" height="40" decoding="async" />
+                            <img id="title-logo-spooni" class="title-logo title-logo-spooni hidden" src="img/spooni.webp" alt="" width="40" height="40" decoding="async" onerror="this.onerror=null;this.src='https://spooni.pages.dev/spooni.webp';" />
+                        </div>
                         <h1 class="title">Props Gallery</h1>
                     </div>
-                    <input type="search" id="search-input" class="search-input" placeholder="Search props, peds, blips, archetypes…" autocomplete="off" />
+                    <input type="search" id="search-input" class="search-input" placeholder="Search props…" autocomplete="off" />
                     <button type="button" class="btn-close" id="btn-close" title="Close">×</button>
                 </header>
                 <div id="content-placed" class="content-placed hidden"></div>
+                <div id="content-player-skin" class="content-player-skin hidden">
+                    <div class="player-skin-toolbar" id="player-skin-toolbar"></div>
+                    <div class="player-skin-grid-wrap" id="content-grid-wrap-skin">
+                        <div id="player-skin-grid" class="props-grid"></div>
+                    </div>
+                </div>
                 <div id="content-grid-wrap" class="content-grid-wrap">
                     <div id="props-grid" class="props-grid"></div>
                 </div>
@@ -86,7 +101,7 @@
                     <p class="pl-speed-val" id="pl-speed-pct">100%</p>
                     <label class="pl-check-wrap">
                         <input type="checkbox" id="pl-free-move" />
-                        <span id="pl-free-move-label">Free move (WASD + mouse)</span>
+                        <span id="pl-free-move-label">Free move (WASD + mouse + V)</span>
                     </label>
                 </section>
                 <section class="pl-section">
